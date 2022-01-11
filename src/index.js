@@ -4,6 +4,16 @@ import "primereact/resources/themes/lara-light-indigo/theme.css";  //theme
 import "primereact/resources/primereact.min.css";                  //core css
 import "primeicons/primeicons.css";                                //icons
 import 'primeflex/primeflex.css'
+import './assets/_overrides.scss';
+import 'primeflex/src/_variables.css';
+import 'primeflex/src/_grid.css';
+import 'primeflex/src/_formlayout.css';
+import 'primeflex/src/_display.css';
+import 'primeflex/src/_text.css';
+import 'primeflex/src/flexbox/_flexbox.css';
+import 'primeflex/src/_spacing.css';
+import 'primeflex/src/_elevation.css';
+ 
 import './index.css';
 import App from './App';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
