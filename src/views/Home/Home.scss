@@ -1,0 +1,33 @@
+@import '/src/styles/_colors.scss';
+
+.home-card {
+  min-height: 420px;
+  margin-bottom: 20pt;
+  transition: all 0.3s;
+}
+
+.home-card:hover {
+  box-shadow: 5px 4px 5px -3px rgba(0, 0, 0, 0.32);
+  -webkit-box-shadow: 5px 4px 5px -3px rgba(0, 0, 0, 0.32);
+  -moz-box-shadow: 5px 4px 5px -3px rgba(0, 0, 0, 0.32);
+  transition: all 0.3s;
+}
+
+.home-cardTitle {
+  font-weight: bold;
+}
+
+.cardTitle-primary {
+  // color: #e01616;
+  color: $color-primary;
+}
+
+.cardTitle-secondary {
+  // color: #bfb979;
+  color: $color-secondary;
+}
+
+.cardTitle-tertiary {
+  // color: #535353;
+  color: $color-tertiary;
+}

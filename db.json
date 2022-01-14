@@ -1,9 +1,55 @@
 {
-  "posts": [
+  "recipes": [
     {
       "id": 1,
-      "title": "json-server",
-      "author": "typicode"
+      "title": "Scrambled Eggs & Cheese",
+      "category": "breakfast",
+      "imageSrc": "recipe_scrambledeggsandcheese.jpg",
+      "summary": "What breakfast is complete without scrambled eggs & cheese? This timeless classic is sure to please, they'll be asking for seconds!",
+      "servingSize": "1 person",
+      "items": [
+        { "name": "Bowl", "quantity": "1" },
+        { "name": "Wisk", "quantity": "1" }
+      ],
+      "ingredients": [
+        { "name": "Egg", "quantity": "3" },
+        { "name": "Salt", "quantity": "TT" },
+        { "name": "Pepper", "quantity": "TT" },
+        { "name": "Shredded Cheddar", "quantity": "TT" }
+      ],
+      "instructionsLocation": "./src/assets/recipes/ScrambledEggsAndCheese.txt"
+    },
+    {
+      "id": 2,
+      "title": "Pancakes",
+      "category": "breakfast",
+      "imageSrc": "recipe_pancakes.jpg",
+      "summary": "Fluffy, delicate, delicious pancakes to impress even the most skeptical breakfasters. This recipe is a true staple in breakfast classics.",
+      "servingSize": "1 person",
+      "items": [
+        { "name": "Bowl", "quantity": "1" },
+        { "name": "Wisk", "quantity": "1" }
+      ],
+      "ingredients": [
+        { "name": "Pancake Batter", "quantity": "1 cup" },
+        { "name": "Maple Syrup", "quantity": "TT" },
+        { "name": "Butter", "quantity": "1 stick" }
+      ],
+      "instructionsLocation": "./src/assets/recipes/Pancakes.txt"
+    },
+    {
+      "id": 3,
+      "title": "Grilled Cheese x2",
+      "category": "sandwich",
+      "summary": "What's not to love about grilled cheese? This simple recipe will satisfy even the deepest cravings of cheesey sandwichy goodness.",
+      "imageSrc": "recipe_grilledcheese.jpg",
+      "servingSize": "1 person",
+      "items": [],
+      "ingredients": [
+        { "name": "Sliced Bread", "quantity": "4 slices" },
+        { "name": "Sliced Cheese", "quantity": "2-4 slices" }
+      ],
+      "instructionsLocation": "./src/assets/recipes/GrilledCheese.txt"
     }
   ],
   "comments": [

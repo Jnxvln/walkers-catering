@@ -1,0 +1,242 @@
+@import './styles/_colors.scss';
+@import url('https://fonts.googleapis.com/css2?family=Carattere&display=swap');
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+#app-headerDivisor {
+  min-height: 65vh;
+}
+
+.appTitle {
+  font-family: 'Carattere';
+  font-weight: bold;
+  font-size: 40pt;
+  color: purple;
+}
+
+.site-btn {
+  border: none;
+}
+
+.site-btn-outlined {
+  border: 1px solid blue;
+  border-radius: 3px;
+  background-color: transparent;
+  padding: 6pt;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+
+.btn-outlined-primary {
+  border-color: $color-primary;
+  color: $color-primary;
+  transition: all 0.3s;
+}
+.btn-outlined-primary:hover {
+  border-color: $color-primary;
+  background-color: $color-primary;
+  color: white;
+  transition: all 0.3s;
+}
+
+.btn-outlined-secondary {
+  border-color: $color-secondary;
+  color: $color-secondary;
+  transition: all 0.3s;
+}
+.btn-outlined-secondary:hover {
+  border-color: $color-secondary;
+  background-color: $color-secondary;
+  color: white;
+  transition: all 0.3s;
+}
+
+.btn-outlined-tertiary {
+  border-color: $color-tertiary;
+  color: $color-tertiary;
+}
+.btn-outlined-tertiary:hover {
+  border-color: $color-tertiary;
+  background-color: $color-tertiary;
+  color: white;
+}
+
+// .btn-primary {
+//   background-color: red;
+// }
+
+// .btn-secondary {
+//   background-color: olive;
+// }
+
+// .btn-tertiary {
+//   background-color: #2c2c2c;
+// }
+
+@media screen and (min-width: 280px) {
+  #app-headerDivisor {
+    min-height: 45vh;
+  }
+
+  #siteheader-title {
+    font-size: 30pt;
+    text-align: center;
+    position: relative;
+    top: 2.1em;
+  }
+
+  #siteheader-subtitle {
+    font-size: 14pt !important;
+    color: white !important;
+    position: relative !important;
+    top: 3.4em !important;
+  }
+
+  .siteheader-showcase {
+    min-height: 40vh !important;
+    padding: 0px !important;
+  }
+}
+
+@media screen and (min-width: 320px) {
+  #siteheader-title {
+    font-size: 30pt;
+  }
+
+  #siteheader-subtitle {
+    font-size: 16pt !important;
+    color: white !important;
+    position: relative !important;
+    top: 2.8em !important;
+  }
+
+  .siteheader-showcase {
+    min-height: 40vh !important;
+    padding: 0px !important;
+  }
+}
+
+@media screen and (min-width: 375px) {
+  #siteheader-subtitle {
+    position: relative;
+    top: 42pt !important;
+  }
+  .siteheader-showcase {
+    min-height: 40vh !important;
+    padding: 0px !important;
+  }
+}
+
+@media screen and (min-width: 375px) and (max-width: 812px) {
+  #siteheader-subtitle {
+    position: relative;
+    top: 56pt !important;
+  }
+  .siteheader-showcase {
+    min-height: 40vh !important;
+    padding: 0px !important;
+  }
+}
+
+@media screen and (min-width: 411px) {
+  #siteheader-subtitle {
+    position: relative;
+    top: 58pt !important;
+  }
+  .siteheader-showcase {
+    min-height: 40vh !important;
+    padding: 0px !important;
+  }
+}
+
+@media screen and (min-width: 414px) {
+  #siteheader-title {
+    font-size: 40pt;
+  }
+
+  #siteheader-subtitle {
+    position: relative;
+    top: 65pt !important;
+  }
+  .siteheader-showcase {
+    min-height: 40vh !important;
+    padding: 0px !important;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  #app-headerDivisor {
+    min-height: 65vh;
+  }
+
+  #siteheader-title {
+    font-size: 60pt;
+    text-align: center;
+  }
+
+  #siteheader-subtitle {
+    font-size: 20pt !important;
+    color: white !important;
+    position: relative !important;
+    top: 5em !important;
+  }
+
+  .siteheader-showcase {
+    min-height: 60vh !important;
+    padding: 0px !important;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  #siteheader-title {
+    font-size: 65pt;
+    text-align: center;
+    position: relative;
+    top: 1.5em;
+  }
+
+  #siteheader-subtitle {
+    font-size: 26pt !important;
+    color: white !important;
+    position: relative !important;
+    top: 2.6em !important;
+  }
+
+  .siteheader-showcase {
+    min-height: 60vh !important;
+    padding: 0px !important;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  #siteheader-title {
+    font-size: 82pt;
+    text-align: center;
+    position: relative;
+    top: 1.5em;
+  }
+
+  #siteheader-subtitle {
+    font-size: 32pt !important;
+    color: white !important;
+    position: relative !important;
+    top: 2.8em !important;
+  }
+
+  .siteheader-showcase {
+    min-height: 60vh !important;
+    padding: 0px !important;
+  }
+}

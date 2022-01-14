@@ -6,7 +6,7 @@ const initialRecipeState = {
 
 const recipeReducer = (state = initialRecipeState, { type, payload }) => {
   switch (type) {
-    case recipeActionType.GET_RECIPE:
+    case recipeActionType.GET_RECIPES:
       return {
         ...state,
         recipeList: payload
