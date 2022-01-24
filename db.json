@@ -52,7 +52,7 @@
       "instructionsLocation": "./src/assets/recipes/GrilledCheese.txt"
     }
   ],
-  "comments": [
+  "news": [
     {
       "id": 1,
       "body": "some comment",

@@ -33,20 +33,55 @@ export default function navbar() {
               <LinkContainer to="/about">
                 <Nav.Link>About</Nav.Link>
               </LinkContainer>
-              <Nav.Link>News</Nav.Link>
-              <Nav.Link>Events</Nav.Link>
-              <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
-                <NavDropdown.Item>Action</NavDropdown.Item>
-                <NavDropdown.Item>Another action</NavDropdown.Item>
-                <NavDropdown.Item>Something</NavDropdown.Item>
-                <NavDropdown.Divider />
-                <NavDropdown.Item>Separated link</NavDropdown.Item>
+
+              <LinkContainer to="/news">
+                <Nav.Link>News</Nav.Link>
+              </LinkContainer>
+
+              <LinkContainer to="/events">
+                <Nav.Link>Events</Nav.Link>
+              </LinkContainer>
+
+              <NavDropdown title="Services" id="collasible-nav-dropdown">
+                <LinkContainer to="/services/catering">
+                  <NavDropdown.Item>Catering</NavDropdown.Item>
+                </LinkContainer>
+
+                <LinkContainer to="/services/classes">
+                  <NavDropdown.Item>Cooking Courses</NavDropdown.Item>
+                </LinkContainer>
+
+                <LinkContainer to="/services/blogging">
+                  <NavDropdown.Item>Blogging</NavDropdown.Item>
+                </LinkContainer>
+
+                <LinkContainer to="/services/social-media">
+                  <NavDropdown.Item>Social Media</NavDropdown.Item>
+                </LinkContainer>
+                {/* <NavDropdown.Divider /> */}
               </NavDropdown>
+
+              <LinkContainer to="/blog">
+                <Nav.Link>Blog</Nav.Link>
+              </LinkContainer>
+
+              <LinkContainer to="/contact">
+                <Nav.Link>Contact</Nav.Link>
+              </LinkContainer>
             </Nav>
+
             <Nav>
-              <Nav.Link>Login</Nav.Link>
-              <Nav.Link>Logout</Nav.Link>
-              <Nav.Link>Sign Up</Nav.Link>
+              <LinkContainer to="/login">
+                <Nav.Link>Login</Nav.Link>
+              </LinkContainer>
+
+              <LinkContainer to="/logout">
+                <Nav.Link>Logout</Nav.Link>
+              </LinkContainer>
+
+              <LinkContainer to="/signup">
+                <Nav.Link>Sign Up</Nav.Link>
+              </LinkContainer>
             </Nav>
           </Navbar.Collapse>
         </Container>

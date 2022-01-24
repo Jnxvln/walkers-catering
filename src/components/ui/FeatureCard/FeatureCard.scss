@@ -1,0 +1,29 @@
+// $color-primary: #e01616;
+// $color-primary-darker: #b41111;
+
+// $color-secondary: #bfb979;
+// $color-secondary-darker: #97915a;
+
+// $color-tertiary: #535353;
+// $color-tertiary-darker: #313131;
+
+.home-card {
+  background-color: white;
+  transition: all 0.3s;
+  margin-bottom: 20pt;
+}
+
+.home-card-primary:hover {
+  background-color: rgb(248, 239, 239);
+  transition: all 0.3s;
+}
+
+.home-card-secondary:hover {
+  background-color: rgb(248, 248, 245);
+  transition: all 0.3s;
+}
+
+.home-card-tertiary:hover {
+  background-color: rgb(243, 243, 243);
+  transition: all 0.3s;
+}

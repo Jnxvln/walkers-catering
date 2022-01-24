@@ -12,7 +12,7 @@ export default function FeatureCard({
   buttonHref,
 }) {
   return (
-    <Card className="home-card">
+    <Card className={`home-card home-card-${type}`}>
       <Card.Img
         variant="top"
         src={require(`@assets/images/generic/${imageSrc}`)}

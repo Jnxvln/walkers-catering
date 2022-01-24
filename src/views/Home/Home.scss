@@ -31,3 +31,81 @@
   // color: #535353;
   color: $color-tertiary;
 }
+
+.home-leadText {
+  font-size: 1.4em;
+  margin-top: 1em;
+}
+
+.home-leadWrapper {
+  padding: 3em 0;
+}
+
+.home-formGroup {
+  margin-bottom: 10pt;
+}
+
+#home-signupRow {
+  // border: 2px solid red;
+  padding: 40pt;
+
+  background-color: #eee0dd;
+  // background-image: url('../../assets/images/generic/cutting-board.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-image: linear-gradient(rgba(56, 56, 56, 0.4), rgba(0, 0, 0, 0.6)),
+    url('../../assets/images/generic/cutting-board.jpg');
+}
+
+#site-signupTitle,
+.signupText {
+  color: white;
+}
+
+#site-signupTitle {
+  font-size: 30pt;
+}
+
+.signupText {
+  font-size: 16pt;
+}
+
+.home-formLabel {
+  color: white;
+}
+
+.home-rowFeatCards {
+  margin-bottom: 80pt;
+}
+
+#home-newsList,
+#home-eventsList {
+  padding: 0;
+  margin-top: 12pt;
+}
+
+#home-newsList li,
+#home-eventsList li {
+  list-style-type: none;
+  margin-bottom: 18pt;
+}
+
+.home-newsItemTitle,
+.home-eventsItemTitle {
+  font-weight: bold;
+}
+
+#home-footer {
+  // border: 1px solid red;
+  background-color: rgb(36, 36, 36);
+  padding: 20pt 0;
+}
+
+#home-copyright {
+  text-align: center;
+  margin: 0;
+  color: white;
+  // font-weight: bold;
+  font-size: 10pt;
+}
