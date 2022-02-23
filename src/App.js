@@ -29,6 +29,8 @@ function App() {
       <div style={{ position: 'fixed', zIndex: '100', width: '100%' }}>
         <SiteToastContainer />
       </div>
+      <br />
+      <br />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />

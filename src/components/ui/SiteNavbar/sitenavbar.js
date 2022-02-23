@@ -47,7 +47,7 @@ export default function Sitenavbar() {
         handleCancelModal={handleCloseLogoutModal}
         handleConfirmModal={handleLogout}
       />
-      <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+      <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" fixed="top">
         <Container>
           <LinkContainer to="/">
             <Navbar.Brand>
