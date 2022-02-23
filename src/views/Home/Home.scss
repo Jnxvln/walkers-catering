@@ -88,12 +88,19 @@
 #home-newsList li,
 #home-eventsList li {
   list-style-type: none;
-  margin-bottom: 18pt;
+  margin-bottom: 28pt;
 }
 
 .home-newsItemTitle,
 .home-eventsItemTitle {
   font-weight: bold;
+}
+
+.home-newsItemSubtitle,
+.home-eventsItemSubtitle {
+  font-style: italic;
+  margin-bottom: 0.4em;
+  font-size: 0.9rem;
 }
 
 #home-footer {

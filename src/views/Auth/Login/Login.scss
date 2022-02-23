@@ -1,0 +1,58 @@
+#login-container {
+  margin-top: 5em;
+  margin-left: 20%;
+  margin-right: 20%;
+
+  background: rgb(252, 252, 252);
+  background: linear-gradient(
+    180deg,
+    rgba(252, 252, 252, 1) 0%,
+    rgba(246, 245, 245, 1) 95%
+  );
+
+  // border: 1px solid transparent;
+  border-radius: 6pt;
+  margin: 5em auto;
+  max-width: 50%;
+  -webkit-box-shadow: 6px 5px 4px -1px rgba(0, 0, 0, 0.05);
+  box-shadow: 6px 5px 4px -1px rgba(0, 0, 0, 0.05);
+}
+
+#login-form {
+  margin: 40pt auto;
+  width: 60%;
+}
+
+#login-controls {
+  // border: 1px solid red;
+  padding: 0.3em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header h1 {
+  text-align: center;
+}
+
+#btnLogin {
+  background-color: rgb(223, 78, 41);
+  width: 20%;
+  border-color: transparent;
+}
+#btnLogin:hover,
+#btnLogin:focus {
+  background-color: rgb(241, 96, 59);
+  border-color: transparent;
+}
+
+#linkForgotPassword,
+#linkForgotPassword:visited,
+#linkForgotPassword:active,
+#linkForgotPassword:link {
+  color: rgb(129, 177, 52);
+}
+
+#linkForgotPassword:hover {
+  color: rgb(42, 146, 172);
+}

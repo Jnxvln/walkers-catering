@@ -1,11 +1,10 @@
-import React from 'react'
+import './News.scss'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
-import NewsList from '@components/ui/NewsList/NewsList'
-import './News.scss'
+import NewsList from '@components/NewsList/NewsList'
 
-export default function News() {
+export default function Events() {
   return (
     <Container id="news-container">
       <Row>

@@ -1,13 +1,52 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
 import NavDropdown from 'react-bootstrap/NavDropdown'
 import Container from 'react-bootstrap/container'
 import { LinkContainer } from 'react-router-bootstrap'
+import SimpleModal from '@components/ui/SimpleModal/SimpleModal'
+import { useSelector, useDispatch } from 'react-redux'
+import { logoutAsync } from '../../../features/auth/authSlice'
+import { createToast } from '../../../features/toasts/toastSlice'
+import { useNavigate } from 'react-router-dom'
+import './Sitenavbar.scss'
 
-export default function navbar() {
+export default function Sitenavbar() {
+  const currentMember = useSelector((state) => state.auth.currentMember)
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+
+  const [showLogoutModal, setShowLogoutModal] = useState(false)
+
+  const handleCloseLogoutModal = () => {
+    setShowLogoutModal(false)
+  }
+
+  const handleLogout = async () => {
+    setShowLogoutModal(false)
+    await dispatch(logoutAsync())
+    navigate('/login')
+    dispatch(
+      createToast({
+        title: 'Logout Success',
+        type: 'SUCCESS',
+        message: 'You logged out',
+        delay: 1200,
+      })
+    )
+  }
+
   return (
-    <nav>
+    <div>
+      <SimpleModal
+        show={showLogoutModal}
+        title="Logout?"
+        message="Are you sure you want to logout?"
+        confirmButtonText="Logout"
+        cancelButtonText="Cancel"
+        handleCancelModal={handleCloseLogoutModal}
+        handleConfirmModal={handleLogout}
+      />
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
         <Container>
           <LinkContainer to="/">
@@ -34,6 +73,17 @@ export default function navbar() {
                 <Nav.Link>About</Nav.Link>
               </LinkContainer>
 
+              <NavDropdown title="Services" id="collasible-nav-dropdown">
+                <LinkContainer to="/services/catering">
+                  <NavDropdown.Item>Catering</NavDropdown.Item>
+                </LinkContainer>
+
+                <LinkContainer to="/services/classes">
+                  <NavDropdown.Item>Classes</NavDropdown.Item>
+                </LinkContainer>
+                {/* <NavDropdown.Divider /> */}
+              </NavDropdown>
+
               <LinkContainer to="/news">
                 <Nav.Link>News</Nav.Link>
               </LinkContainer>
@@ -42,24 +92,9 @@ export default function navbar() {
                 <Nav.Link>Events</Nav.Link>
               </LinkContainer>
 
-              <NavDropdown title="Services" id="collasible-nav-dropdown">
-                <LinkContainer to="/services/catering">
-                  <NavDropdown.Item>Catering</NavDropdown.Item>
-                </LinkContainer>
-
-                <LinkContainer to="/services/classes">
-                  <NavDropdown.Item>Cooking Courses</NavDropdown.Item>
-                </LinkContainer>
-
-                <LinkContainer to="/services/blogging">
-                  <NavDropdown.Item>Blogging</NavDropdown.Item>
-                </LinkContainer>
-
-                <LinkContainer to="/services/social-media">
-                  <NavDropdown.Item>Social Media</NavDropdown.Item>
-                </LinkContainer>
-                {/* <NavDropdown.Divider /> */}
-              </NavDropdown>
+              <LinkContainer to="/club">
+                <Nav.Link>Club Membership</Nav.Link>
+              </LinkContainer>
 
               <LinkContainer to="/blog">
                 <Nav.Link>Blog</Nav.Link>
@@ -71,21 +106,36 @@ export default function navbar() {
             </Nav>
 
             <Nav>
-              <LinkContainer to="/login">
-                <Nav.Link>Login</Nav.Link>
-              </LinkContainer>
+              {!currentMember && (
+                <LinkContainer id="navlink-login" to="/login">
+                  <Nav.Link>Login</Nav.Link>
+                </LinkContainer>
+              )}
 
-              <LinkContainer to="/logout">
-                <Nav.Link>Logout</Nav.Link>
-              </LinkContainer>
+              {currentMember && (
+                <LinkContainer id="navlink-clubhouse" to="/clubhouse">
+                  <Nav.Link>Club House</Nav.Link>
+                </LinkContainer>
+              )}
 
-              <LinkContainer to="/signup">
-                <Nav.Link>Sign Up</Nav.Link>
-              </LinkContainer>
+              {currentMember && (
+                <div
+                  id="navlink-logout"
+                  onClick={async () => setShowLogoutModal(true)}
+                >
+                  <Nav.Link className="subNavLink">Logout</Nav.Link>
+                </div>
+              )}
+
+              {!currentMember && (
+                <LinkContainer to="/club/join">
+                  <Nav.Link id="navlink-signup">Join The Club</Nav.Link>
+                </LinkContainer>
+              )}
             </Nav>
           </Navbar.Collapse>
         </Container>
       </Navbar>
-    </nav>
+    </div>
   )
 }

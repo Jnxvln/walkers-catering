@@ -1,0 +1,32 @@
+#navlink-login {
+  color: white;
+  background-color: rgb(184, 112, 31);
+  border-radius: 5pt;
+  margin-right: 8pt;
+  // font-weight: bold;
+}
+#navlink-signup {
+  color: white;
+  background-color: rgb(104, 146, 36);
+  border-radius: 5pt;
+  // font-weight: bold;
+}
+
+#navlink-logout {
+  color: white;
+  background-color: rgb(85, 85, 85);
+  border-radius: 5pt;
+}
+#navlink-logout .subNavLink {
+  color: white;
+}
+#navlink-logout:hover {
+  background-color: rgb(134, 134, 134);
+}
+
+#navlink-clubhouse {
+  color: white;
+  background-color: rgb(104, 146, 36);
+  border-radius: 5pt;
+  margin-right: 8pt;
+}

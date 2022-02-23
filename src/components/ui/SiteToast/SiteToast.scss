@@ -1,0 +1,14 @@
+.site-toast {
+  z-index: 100 !important;
+}
+
+.toast-header-ERROR {
+  background-color: rgb(182, 51, 51);
+  color: white;
+  font-weight: bold;
+}
+.toast-header-SUCCESS {
+  background-color: rgb(83, 150, 63);
+  color: white;
+  font-weight: bold;
+}

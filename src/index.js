@@ -3,12 +3,12 @@ import ReactDOM from 'react-dom'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './styles/_colors.scss'
 import './index.scss'
-import { Provider } from 'react-redux'
-import { BrowserRouter } from 'react-router-dom'
 import App from './App'
+import { BrowserRouter } from 'react-router-dom'
 import * as serviceWorkerRegistration from './serviceWorkerRegistration'
 import reportWebVitals from './reportWebVitals'
-import store from './store'
+import store from './store/store'
+import { Provider } from 'react-redux'
 
 ReactDOM.render(
   <BrowserRouter>

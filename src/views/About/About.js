@@ -6,7 +6,7 @@ import './About.scss'
 
 export default function About() {
   return (
-    <Container style={{ marginTop: '3em' }}>
+    <Container id="about-container">
       <Row>
         <Col lg={5}>
           <section className="about-section">

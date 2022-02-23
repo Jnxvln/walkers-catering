@@ -1,23 +1,39 @@
+import './Home.scss'
 import React from 'react'
 import Container from 'react-bootstrap/container'
 import Row from 'react-bootstrap/row'
 import Col from 'react-bootstrap/col'
-import Card from 'react-bootstrap/card'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/form'
 import FeatureCard from '@components/ui/FeatureCard/FeatureCard'
 import SiteHeader from '@components/ui/SiteHeader/siteheader.js'
-import './Home.scss'
-import { Tooltip } from 'bootstrap'
+import dayjs from 'dayjs'
+
+// STATE RELATED
+// TODO: For now, covert these back (to not using RTK Query); still don't understand quite enough
+import { useGetLatestNewsQuery } from '../../api/newsApi'
+import { useGetLatestEventsQuery } from '../../api/eventsApi'
 
 export default function Home() {
+  // NEWS
+  const newsData = useGetLatestNewsQuery().data
+  const newsError = useGetLatestNewsQuery().error
+  const newsIsLoading = useGetLatestNewsQuery().isLoading
+
+  // EVENTS
+  const eventsData = useGetLatestEventsQuery().data
+  const eventsError = useGetLatestEventsQuery().error
+  const eventsIsLoading = useGetLatestEventsQuery().isLoading
+
   return (
     <div>
       <SiteHeader />
 
       <div id="app-headerDivisor"></div>
 
+      {/* === WELCOME MESSAGE & FEATURED CARDS === */}
       <Container>
+        {/* Header */}
         <Row>
           <Col>
             <section className="home-leadWrapper">
@@ -37,8 +53,11 @@ export default function Home() {
           </Col>
         </Row>
 
+        {/* === FEATURE CARDS === */}
         <Row className="home-rowFeatCards">
+          {/* Left Card */}
           <Col sm={6} md={6} lg={4}>
+            {/* LEFT CARD */}
             <FeatureCard
               imageSrc="two-cook.jpg"
               title="Professional Catering"
@@ -47,9 +66,11 @@ export default function Home() {
                   delicious foods that are sure to please, then you’ve come to the
                   right place!"
               buttonText="Learn More"
+              href="/services/catering"
             />
           </Col>
 
+          {/* Center Card */}
           <Col sm={6} md={6} lg={4}>
             <FeatureCard
               imageSrc="bday-party.jpg"
@@ -59,9 +80,11 @@ export default function Home() {
                   corporate luncheons, birthdays, graduation parties, retirement
                   parties, and more!"
               buttonText="Learn More"
+              href="/"
             />
           </Col>
 
+          {/* Right Card */}
           <Col sm={6} md={6} lg={4}>
             <FeatureCard
               imageSrc="teach-cook.jpg"
@@ -71,30 +94,34 @@ export default function Home() {
                   techniques. Follow along, step by step, and create
                   mouth-watering dishes ready to impress."
               buttonText="Learn More"
+              href="/"
             />
           </Col>
         </Row>
       </Container>
 
-      {/* SIGN UP ROW */}
+      {/* === NEWSLETTER ROW === */}
       <div>
         <Row id="home-signupRow">
+          {/* Newsletter Signup Text */}
           <Col md={6}>
-            <Container class="site-signupSection">
-              <h3 id="site-signupTitle">Sign Up Today</h3>
+            <Container className="site-signupSection">
+              <h3 id="site-signupTitle">Sign Up for our Newsletter</h3>
               <p className="signupText">
-                Get access to so much more content when you sign up
+                Grow with me and stay in the know about what's going on
               </p>
               <ul>
-                <li className="signupText">Additional recipes</li>
-                <li className="signupText">More courses</li>
-                <li className="signupText">Newsletter (optional)</li>
+                <li className="signupText">Learn about community events</li>
                 <li className="signupText">
-                  Stay updated on new events, recipes, and more (optional)
+                  Receive e-mails when we add new content
                 </li>
+                <li className="signupText">Happenings within the Club</li>
+                <li className="signupText">Occasional give-aways</li>
               </ul>
             </Container>
           </Col>
+
+          {/* Newsletter Signup Form */}
           <Col md={6}>
             <Container className="home-signup">
               <Form>
@@ -120,59 +147,72 @@ export default function Home() {
         </Row>
       </div>
 
-      {/* NEWS & EVENTS - SUMMARY */}
+      {/* === NEWS & EVENTS - SUMMARY === */}
       <Container id="home-newsRowContainer">
         <Row id="home-newsRow">
+          {/* News List */}
           <Col md={6}>
             <h1>News</h1>
+            {/* TODO: Extract NewsList to separate UI component */}
             <ul id="home-newsList">
-              <li>
-                <div>
-                  <p className="home-newsItemTitle">Thur, January 13th</p>
-                  <div>
-                    Et cupidatat tempor qui cupidatat sit. Deserunt aliqua duis
-                    magna cupidatat sunt exercitation dolore.{' '}
-                    <a href="/">Read more...</a>
-                  </div>
-                </div>
-              </li>
-              <li>
-                <div>
-                  <p className="home-newsItemTitle">Thur, January 13th</p>
-                  <div>
-                    Et cupidatat tempor qui cupidatat sit. Deserunt aliqua duis
-                    magna cupidatat sunt exercitation dolore.{' '}
-                    <a href="/">Read more...</a>
-                  </div>
-                </div>
-              </li>
+              {newsError ? (
+                <li>Error loading news...</li>
+              ) : newsIsLoading ? (
+                <li>Loading news...</li>
+              ) : newsData ? (
+                newsData.map((article) => (
+                  <li key={article._id}>
+                    <div>
+                      <div className="home-newsItemTitle">{article.title}</div>
+                      <p className="home-newsItemSubtitle">
+                        {dayjs(article.published).format(
+                          'dddd, MMM DD, YYYY @ h:mm a'
+                        )}
+                      </p>
+                      <div>
+                        {article.content}
+                        <br />
+                        {article.link.length > 0 &&
+                          article.linkText.length > 0 && (
+                            <a href={article.link}>{article.linkText}</a>
+                          )}
+                      </div>
+                    </div>
+                  </li>
+                ))
+              ) : null}
             </ul>
             <br />
           </Col>
 
+          {/* Upcoming Events */}
           <Col md={6}>
             <h1>Upcoming Events</h1>
+            {/* TODO: Extract EventsList to separate UI component */}
             <ul id="home-eventsList">
-              <li>
-                <div>
-                  <p className="home-eventsItemTitle">Thur, January 13th</p>
-                  <div>
-                    Et cupidatat tempor qui cupidatat sit. Deserunt aliqua duis
-                    magna cupidatat sunt exercitation dolore.{' '}
-                    <a href="/">Read more...</a>
-                  </div>
-                </div>
-              </li>
-              <li>
-                <div>
-                  <p className="home-eventsItemTitle">Thur, January 13th</p>
-                  <div>
-                    Et cupidatat tempor qui cupidatat sit. Deserunt aliqua duis
-                    magna cupidatat sunt exercitation dolore.{' '}
-                    <a href="/">Read more...</a>
-                  </div>
-                </div>
-              </li>
+              {eventsError ? (
+                <li>Error loading events...</li>
+              ) : eventsIsLoading ? (
+                <li>Loading events...</li>
+              ) : eventsData ? (
+                eventsData.map((ev) => (
+                  <li key={ev._id}>
+                    <div>
+                      <div className="home-eventsItemTitle">{ev.title}</div>
+                      <p className="home-eventsItemSubtitle">
+                        {dayjs(ev.published).format('dddd, MMM DD, YYYY')}
+                      </p>
+                      <div>
+                        {ev.content}
+                        <br />
+                        {ev.link.length > 0 && ev.linkText.length > 0 && (
+                          <a href={ev.link}>{ev.linkText}</a>
+                        )}
+                      </div>
+                    </div>
+                  </li>
+                ))
+              ) : null}
             </ul>
           </Col>
         </Row>
@@ -181,6 +221,7 @@ export default function Home() {
       {/* FOOTER */}
       <Row>
         <Col>
+          {/* TODO: Separate Footer into separate UI component */}
           <footer id="home-footer">
             <div style={{ display: 'flex', justifyContent: 'center' }}>
               <Button

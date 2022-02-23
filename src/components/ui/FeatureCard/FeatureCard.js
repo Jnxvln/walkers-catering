@@ -10,6 +10,7 @@ export default function FeatureCard({
   summary,
   buttonText,
   buttonHref,
+  href,
 }) {
   return (
     <Card className={`home-card home-card-${type}`}>
@@ -22,7 +23,7 @@ export default function FeatureCard({
           {title}
         </Card.Title>
         <Card.Text className="home-cardText">{summary}</Card.Text>
-        <a href="/about" className={`site-btn-outlined btn-outlined-${type}`}>
+        <a href={href} className={`site-btn-outlined btn-outlined-${type}`}>
           {buttonText}
         </a>
       </Card.Body>
