@@ -16,7 +16,7 @@ function Profile() {
       <Row>
         <Col>
           <header>
-            <h1>Profile</h1>
+            <h2 className="title">My Profile</h2>
           </header>
 
           <ListGroup>

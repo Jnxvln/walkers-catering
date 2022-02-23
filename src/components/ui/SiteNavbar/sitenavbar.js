@@ -1,3 +1,4 @@
+import './Sitenavbar.scss'
 import React, { useState } from 'react'
 import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
@@ -9,7 +10,6 @@ import { useSelector, useDispatch } from 'react-redux'
 import { logoutAsync } from '../../../features/auth/authSlice'
 import { createToast } from '../../../features/toasts/toastSlice'
 import { useNavigate } from 'react-router-dom'
-import './Sitenavbar.scss'
 
 export default function Sitenavbar() {
   const currentMember = useSelector((state) => state.auth.currentMember)

@@ -1,6 +1,7 @@
 import './ClubhouseMenu.scss'
 import React from 'react'
 import { Tabs, Tab } from 'react-bootstrap'
+import Home from './Home/Home'
 import Profile from './Profile/Profile'
 import { getMemberAsync } from '../../features/auth/authSlice'
 import { useSelector, useDispatch } from 'react-redux'
@@ -25,12 +26,8 @@ function ClubhouseMenu() {
         }
       }}
     >
-      <Tab
-        className="clubhouse-menu-tab"
-        eventKey="clubhouse"
-        title="Club House"
-      >
-        {member && <p>Welcome back, {member.firstName}!</p>}
+      <Tab className="clubhouse-menu-tab" eventKey="clubhouse" title="Home">
+        <Home />
       </Tab>
       <Tab className="clubhouse-menu-tab" eventKey="profile" title="Profile">
         <Profile />
