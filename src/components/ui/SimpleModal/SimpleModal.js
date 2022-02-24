@@ -12,7 +12,7 @@ export default function SimpleModal({
   handleConfirmModal,
 }) {
   return (
-    <Modal show={show} onHide={handleCancelModal}>
+    <Modal show={show} onHide={handleCancelModal} backdrop="static">
       <Modal.Header closeButton>
         <Modal.Title>{title}</Modal.Title>
       </Modal.Header>

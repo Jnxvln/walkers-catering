@@ -76,10 +76,7 @@ export const authSlice = createSlice({
     [loginAsync.fulfilled]: (state, action) => {
       const { member, token } = action.payload
 
-      // console.log('ACTION PAYLOAD: ', action.payload)
-
       sessionStorage.setItem('user', JSON.stringify(action.payload))
-      // console.log('user: ', JSON.parse(sessionStorage.getItem('user')))
 
       if (!member || !token) {
         state.currentMember = null

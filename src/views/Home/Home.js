@@ -1,5 +1,5 @@
 import './Home.scss'
-import React from 'react'
+import React, { useEffect } from 'react'
 import Container from 'react-bootstrap/container'
 import Row from 'react-bootstrap/row'
 import Col from 'react-bootstrap/col'
@@ -8,22 +8,30 @@ import Form from 'react-bootstrap/form'
 import FeatureCard from '@components/ui/FeatureCard/FeatureCard'
 import SiteHeader from '@components/ui/SiteHeader/siteheader.js'
 import dayjs from 'dayjs'
+import { useDispatch, useSelector } from 'react-redux'
 
 // STATE RELATED
 // TODO: For now, covert these back (to not using RTK Query); still don't understand quite enough
-import { useGetLatestNewsQuery } from '../../api/newsApi'
+// import { useGetLatestNewsQuery } from '../../api/newsApi'
+import { fetchNews } from '@features/news/newsSlice'
 import { useGetLatestEventsQuery } from '../../api/eventsApi'
 
 export default function Home() {
   // NEWS
-  const newsData = useGetLatestNewsQuery().data
-  const newsError = useGetLatestNewsQuery().error
-  const newsIsLoading = useGetLatestNewsQuery().isLoading
+  // const newsData = useGetLatestNewsQuery().data
+  // const newsError = useGetLatestNewsQuery().error
+  // const newsIsLoading = useGetLatestNewsQuery().isLoading
 
-  // EVENTS
+  const dispatch = useDispatch()
   const eventsData = useGetLatestEventsQuery().data
   const eventsError = useGetLatestEventsQuery().error
   const eventsIsLoading = useGetLatestEventsQuery().isLoading
+
+  useEffect(() => {
+    dispatch(fetchNews())
+  }, [dispatch])
+
+  const news = useSelector((state) => state.news.articles)
 
   return (
     <div>
@@ -155,12 +163,8 @@ export default function Home() {
             <h1>News</h1>
             {/* TODO: Extract NewsList to separate UI component */}
             <ul id="home-newsList">
-              {newsError ? (
-                <li>Error loading news...</li>
-              ) : newsIsLoading ? (
-                <li>Loading news...</li>
-              ) : newsData ? (
-                newsData.map((article) => (
+              {news &&
+                news.map((article) => (
                   <li key={article._id}>
                     <div>
                       <div className="home-newsItemTitle">{article.title}</div>
@@ -179,8 +183,7 @@ export default function Home() {
                       </div>
                     </div>
                   </li>
-                ))
-              ) : null}
+                ))}
             </ul>
             <br />
           </Col>

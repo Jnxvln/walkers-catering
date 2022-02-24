@@ -15,6 +15,8 @@ import Login from '@views/Auth/Login/Login/'
 import CateringService from '@views/Services/Catering/CateringServices'
 import ClassesService from '@views/Services/Classes/Classes'
 import ClubLanding from '@views/Clubhouse/ClubLanding/ClubLanding'
+import ManageNews from '@views/Clubhouse/Admin/News/ManageNews'
+import CreateNews from '@views/Clubhouse/Admin/News/CreateNews'
 // #endregion
 
 function PrivateRoute({ children }) {
@@ -42,7 +44,6 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/services/catering" element={<CateringService />} />
         <Route path="/services/classes" element={<ClassesService />} />
-        {/* <Route path="/clubhouse" element={<ClubLanding />} /> */}
         <Route
           path="/clubhouse"
           element={
@@ -51,6 +52,23 @@ function App() {
             </PrivateRoute>
           }
         />
+        <Route path="/clubhouse/admin" element={<Login />} />
+        <Route
+          path="/clubhouse/admin/news"
+          element={
+            <PrivateRoute>
+              <ManageNews />
+            </PrivateRoute>
+          }
+        ></Route>
+        <Route
+          path="/clubhouse/admin/news/create"
+          element={
+            <PrivateRoute>
+              <CreateNews />
+            </PrivateRoute>
+          }
+        ></Route>
 
         {/* <Route path="/clubhouse" element={<PrivateOutlet />}>
           <Route element={<ClubLanding />} />

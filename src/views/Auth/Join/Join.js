@@ -5,9 +5,13 @@ import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button'
 import { Form } from 'react-bootstrap'
 import axios from 'axios'
+import { useDispatch } from 'react-redux'
+import { createToast } from '../../../features/toasts/toastSlice'
 import './Join.scss'
 
 export default function Join() {
+  const dispatch = useDispatch()
+
   const navigate = useNavigate()
   const [state, setState] = useState({
     firstName: '',
@@ -41,10 +45,11 @@ export default function Join() {
     }))
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
     console.log('MEMBER DATA TO SUBMIT TO SERVER:')
     console.log(state)
+
     const member = {
       firstName: state.firstName,
       lastName: state.lastName,
@@ -55,37 +60,79 @@ export default function Join() {
       interests: state.interests,
       isMemberActive: true,
       isSubscriptionActive: false,
-      subscriptionSince: '',
+      subscriptionSince: null,
       dateAccountCreated: new Date(),
       memberSince: new Date(),
     }
 
-    try {
-      axios
-        .post('http://localhost:3001/api/club/members', member)
-        .then((res) => {
-          if (!res) {
-            throw new Error(
-              'ERROR! [Join.js - handleSubmit()]: Falsey response from server.'
-            )
-          }
+    axios
+      .post('http://localhost:3001/api/club/members', member)
+      .then((res) => {
+        if (!res) {
+          throw new Error(
+            'ERROR! [Join.js - handleSubmit()]: Falsey response from server.'
+          )
+        }
 
-          if (!res.data) {
-            throw new Error(
-              'ERROR! [Join.js - handleSubmmit()]: Response good, but data property is falsey'
-            )
-          }
+        if (!res.data) {
+          throw new Error(
+            'ERROR! [Join.js - handleSubmmit()]: Response good, but data property is falsey'
+          )
+        }
 
-          // POST was successful
-          // console.log(res.data)
+        console.log('SERVER RESPONSE: ', res)
 
-          navigate('/login')
-          clearForm()
-        })
-    } catch (error) {
-      console.error('ERROR! [Join.js - handleSubmit() CATCH error: ')
-      console.error(error)
-    }
+        clearForm()
+        dispatch(
+          createToast({
+            title: 'Welcome',
+            type: 'SUCCESS',
+            message:
+              'Thank you for signing up! Please verify your e-mail address in the link we e-mailed to you. You may now log in!',
+          })
+        )
+        navigate('/login')
+      })
+      .catch((err) => {
+        console.log('ERROR RESPONSE: ')
+        console.error(err)
+      })
+
+    // axios
+    //   .post('http://localhost:3001/api/club/members', member)
+    //   .then((res) => {
+    //     if (!res) {
+    //       throw new Error(
+    //         'ERROR! [Join.js - handleSubmit()]: Falsey response from server.'
+    //       )
+    //     }
+
+    //     if (!res.data) {
+    //       throw new Error(
+    //         'ERROR! [Join.js - handleSubmmit()]: Response good, but data property is falsey'
+    //       )
+    //     }
+
+    //     // POST was successful
+    //     // console.log(res.data)
+
+    //     // Otherwise clear form, show confirmation message and navigate to login page
+    //     clearForm()
+    //     dispatch(
+    //       createToa
+    //         tist({tle: 'Welcome',
+    //         type: 'SUCCESS',
+    //         message:
+    //           'Thank you for signing up! Please verify your e-mail address in the link we e-mailed to you. You may now log in!',
+    //       })
+    //     )
+    //     navigate('/login')
+    //   })
+    //   .catch((err) => {
+    //     console.log('SIGNUP ERROR: ')
+    //     console.error(err.type)
+    //     console.error(err)
+    //   })
   }
 
   return (

@@ -1,8 +1,9 @@
 import './ClubhouseMenu.scss'
-import React from 'react'
+import React, { useState } from 'react'
 import { Tabs, Tab } from 'react-bootstrap'
 import Home from './Home/Home'
 import Profile from './Profile/Profile'
+import Admin from './Admin/Admin'
 import { getMemberAsync } from '../../features/auth/authSlice'
 import { useSelector, useDispatch } from 'react-redux'
 
@@ -15,17 +16,28 @@ function ClubhouseMenu() {
 
   const member = useSelector((state) => state.auth.currentMember)
 
+  const [key, setKey] = useState(() => {
+    if (member) return 'admin'
+    return 'home'
+  })
+
   return (
     <Tabs
-      defaultActiveKey="clubhouse"
       id="clubhouse-menu"
       className="mb-3"
       onSelect={(key) => {
         if (key === 'profile') {
           refreshMember()
+        } else {
+          setKey(key)
         }
       }}
     >
+      {member && member.isAdmin && member.isAdmin === true && (
+        <Tab className="clubhouse-menu-tab" eventKey="admin" title="Admin">
+          <Admin />
+        </Tab>
+      )}
       <Tab className="clubhouse-menu-tab" eventKey="clubhouse" title="Home">
         <Home />
       </Tab>

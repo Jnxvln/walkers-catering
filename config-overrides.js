@@ -8,6 +8,7 @@ module.exports = function override(config) {
     '@store': 'src/store',
     '@utils': 'src/utils',
     '@views': 'src/views',
+    '@features': 'src/features',
   })(config)
 
   return config
