@@ -51,7 +51,7 @@ export default function EditNews({
   return (
     <Modal show={show} onHide={cancelAction} backdrop="static">
       <Modal.Header closeButton>
-        <Modal.Title>Edit News Article: {articleId}</Modal.Title>
+        <Modal.Title>Edit Article</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Form>
