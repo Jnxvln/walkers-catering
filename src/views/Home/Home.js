@@ -1,5 +1,6 @@
 import './Home.scss'
 import React, { useEffect } from 'react'
+import dayjs from 'dayjs'
 import Container from 'react-bootstrap/container'
 import Row from 'react-bootstrap/row'
 import Col from 'react-bootstrap/col'
@@ -7,31 +8,20 @@ import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/form'
 import FeatureCard from '@components/ui/FeatureCard/FeatureCard'
 import SiteHeader from '@components/ui/SiteHeader/siteheader.js'
-import dayjs from 'dayjs'
 import { useDispatch, useSelector } from 'react-redux'
-
-// STATE RELATED
-// TODO: For now, covert these back (to not using RTK Query); still don't understand quite enough
-// import { useGetLatestNewsQuery } from '../../api/newsApi'
 import { fetchNews } from '@features/news/newsSlice'
-import { useGetLatestEventsQuery } from '../../api/eventsApi'
+import { fetchEvents } from '@features/events/eventsSlice'
 
 export default function Home() {
-  // NEWS
-  // const newsData = useGetLatestNewsQuery().data
-  // const newsError = useGetLatestNewsQuery().error
-  // const newsIsLoading = useGetLatestNewsQuery().isLoading
-
   const dispatch = useDispatch()
-  const eventsData = useGetLatestEventsQuery().data
-  const eventsError = useGetLatestEventsQuery().error
-  const eventsIsLoading = useGetLatestEventsQuery().isLoading
 
   useEffect(() => {
     dispatch(fetchNews())
+    dispatch(fetchEvents())
   }, [dispatch])
 
   const news = useSelector((state) => state.news.articles)
+  const events = useSelector((state) => state.events.articles)
 
   return (
     <div>
@@ -193,12 +183,8 @@ export default function Home() {
             <h1>Upcoming Events</h1>
             {/* TODO: Extract EventsList to separate UI component */}
             <ul id="home-eventsList">
-              {eventsError ? (
-                <li>Error loading events...</li>
-              ) : eventsIsLoading ? (
-                <li>Loading events...</li>
-              ) : eventsData ? (
-                eventsData.map((ev) => (
+              {events &&
+                events.map((ev) => (
                   <li key={ev._id}>
                     <div>
                       <div className="home-eventsItemTitle">{ev.title}</div>
@@ -214,8 +200,7 @@ export default function Home() {
                       </div>
                     </div>
                   </li>
-                ))
-              ) : null}
+                ))}
             </ul>
           </Col>
         </Row>

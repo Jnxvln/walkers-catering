@@ -6,7 +6,7 @@ import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button'
 import { Form, FloatingLabel } from 'react-bootstrap'
 import { createToast } from '../../../features/toasts/toastSlice'
-// import axios from 'axios'
+import { BiLogInCircle } from 'react-icons/bi'
 
 import { useDispatch } from 'react-redux'
 import { loginAsync } from '../../../features/auth/authSlice'
@@ -107,8 +107,12 @@ export default function Login() {
 
             <div id="login-controls" className="mt-3">
               <Button id="btnLogin" type="submit">
+                <BiLogInCircle className="me-2" />
                 Login
               </Button>
+              <a id="linkJoin" href="/club/join">
+                Sign Up
+              </a>
               <a id="linkForgotPassword" href="/">
                 Forgot Password
               </a>

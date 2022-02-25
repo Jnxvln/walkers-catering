@@ -37,7 +37,6 @@ header h1 {
 
 #btnLogin {
   background-color: rgb(223, 78, 41);
-  width: 20%;
   border-color: transparent;
 }
 #btnLogin:hover,
@@ -55,4 +54,14 @@ header h1 {
 
 #linkForgotPassword:hover {
   color: rgb(42, 146, 172);
+}
+
+#linkJoin,
+#linkJoin:visited,
+#linkJoin:active,
+#linkJoin:link {
+  color: #096dc0;
+}
+#linkJoin:hover {
+  color: #3090df;
 }

@@ -1,4 +1,4 @@
-import './ManageNews.scss'
+import './ManageEvents.scss'
 import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Container from 'react-bootstrap/Container'
@@ -8,12 +8,12 @@ import Button from 'react-bootstrap/Button'
 import { Table } from 'react-bootstrap'
 import { useSelector, useDispatch } from 'react-redux'
 import {
-  fetchNews,
+  fetchEvents,
   deleteArticleById,
   updateArticleById,
-} from '@features/news/newsSlice'
+} from '@features/events/eventsSlice'
 import SimpleModal from '@components/ui/SimpleModal/SimpleModal'
-import EditNewsModal from '@views/Clubhouse/Admin/News/EditNews'
+import EditEventsModal from '@views/Clubhouse/Admin/Events/EditEvents'
 import { createToast, clearToastsAsync } from '@features/toasts/toastSlice'
 import dayjs from 'dayjs'
 import { FaArrowLeft } from 'react-icons/fa'
@@ -21,12 +21,12 @@ import { FaPlus } from 'react-icons/fa'
 import { FaEdit } from 'react-icons/fa'
 import { FaTrashAlt } from 'react-icons/fa'
 
-function ManageNews() {
+function ManageEvents() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const token = useSelector((state) => state.auth.token)
 
-  const news = useSelector((state) => state.news.articles)
+  const events = useSelector((state) => state.events.articles)
   const [idToDelete, setIdToDelete] = useState('')
   const [showConfirmDeleteModal, setShowConfirmDeleteModal] = useState(false)
   const [idToEdit, setIdToEdit] = useState('')
@@ -34,75 +34,73 @@ function ManageNews() {
 
   const handleDeleteArticle = () => {
     setShowConfirmDeleteModal(false)
-    dispatch(deleteArticleById({ id: idToDelete, token })).then((result) => {
-      if (result && result.payload) {
-        dispatch(
-          createToast({
-            title: 'Success',
-            type: 'SUCCESS',
-            message: 'Article deleted!',
-            delay: 1500,
-          })
-        )
-        dispatch(clearToastsAsync())
-      } else {
-        dispatch(
-          createToast({
-            title: 'Error',
-            type: 'ERROR',
-            message: 'An error occurred, article may not have deleted!',
-            delay: 8000,
-          })
-        )
-        dispatch(clearToastsAsync())
-      }
-    })
+    const result = dispatch(deleteArticleById({ id: idToDelete, token }))
+    if (result && result.payload) {
+      dispatch(
+        createToast({
+          title: 'Success',
+          type: 'SUCCESS',
+          message: 'Event deleted!',
+          delay: 1500,
+        })
+      )
+      dispatch(clearToastsAsync())
+    } else {
+      dispatch(
+        createToast({
+          title: 'Error',
+          type: 'ERROR',
+          message: 'An error occurred, event may not have deleted!',
+          delay: 8000,
+        })
+      )
+      dispatch(clearToastsAsync())
+    }
   }
 
   const handleSaveEditArticle = async (article) => {
     setShowEditModal(false)
-    await dispatch(updateArticleById(article)).then((result) => {
-      if (result && result.payload) {
-        dispatch(
-          createToast({
-            title: 'Success',
-            type: 'SUCCESS',
-            message: 'Article updated!',
-            delay: 1500,
-          })
-        )
-        dispatch(clearToastsAsync())
-      } else {
-        dispatch(
-          createToast({
-            title: 'Error',
-            type: 'ERROR',
-            message: 'An error occurred, changes may not have saved!',
-            delay: 8000,
-          })
-        )
-        dispatch(clearToastsAsync())
-      }
-    })
+    const result = await dispatch(updateArticleById(article))
+    if (result && result.payload) {
+      dispatch(
+        createToast({
+          title: 'Success',
+          type: 'SUCCESS',
+          message: 'Event updated!',
+          delay: 1500,
+        })
+      )
+      dispatch(clearToastsAsync())
+    } else {
+      dispatch(
+        createToast({
+          title: 'Error',
+          type: 'ERROR',
+          message: 'An error occurred, changes may not have saved!',
+          delay: 8000,
+        })
+      )
+      dispatch(clearToastsAsync())
+    }
   }
 
   useEffect(() => {
-    dispatch(fetchNews())
+    dispatch(fetchEvents())
   }, [dispatch])
 
   return (
-    <Container id="admin-manageNews-container">
+    <Container id="admin-manageEvents-container">
       <SimpleModal
         show={showConfirmDeleteModal}
-        title="Delete Article?"
-        message="Are you sure you want to delete this article?"
+        title="Delete Event?"
+        message="Are you sure you want to delete this event?"
         confirmButtonText="Delete"
         cancelButtonText="Cancel"
         handleCancelModal={() => setShowConfirmDeleteModal(false)}
         handleConfirmModal={() => handleDeleteArticle()}
       />
 
-      <EditNewsModal
+      <EditEventsModal
         articleId={idToEdit}
         show={showEditModal}
         confirmText="Save"
@@ -123,15 +121,15 @@ function ManageNews() {
             Back
           </Button>
           <header>
-            <h3>Manage News</h3>
+            <h3>Manage Events</h3>
           </header>
           <Button
             className="mb-4"
-            title="Create new article"
-            onClick={() => navigate('/clubhouse/admin/news/create')}
+            title="Create new event"
+            onClick={() => navigate('/clubhouse/admin/events/create')}
           >
             <FaPlus className="me-2" />
-            New Article
+            New Event
           </Button>
 
           <Table striped bordered hover size="sm">
@@ -145,8 +143,8 @@ function ManageNews() {
               </tr>
             </thead>
             <tbody>
-              {news &&
-                news.map((article) => (
+              {events &&
+                events.map((article) => (
                   <tr key={article._id}>
                     <td>{dayjs(article.published).format('M/DD/YY')}</td>
                     <td>{article.title}</td>
@@ -156,7 +154,7 @@ function ManageNews() {
                       <Button
                         variant="secondary"
                         className="me-2"
-                        title="Edit Article"
+                        title="Edit Event"
                         size="sm"
                         onClick={() => {
                           setIdToEdit(article._id)
@@ -167,7 +165,7 @@ function ManageNews() {
                       </Button>
                       <Button
                         variant="danger"
-                        title="Delete Article"
+                        title="Delete Event"
                         size="sm"
                         onClick={() => {
                           setIdToDelete(article._id)
@@ -187,4 +185,4 @@ function ManageNews() {
   )
 }
 
-export default ManageNews
+export default ManageEvents

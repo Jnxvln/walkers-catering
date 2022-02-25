@@ -10,6 +10,8 @@ import { useSelector, useDispatch } from 'react-redux'
 import { logoutAsync } from '../../../features/auth/authSlice'
 import { createToast } from '../../../features/toasts/toastSlice'
 import { useNavigate } from 'react-router-dom'
+import { BsFillHouseFill } from 'react-icons/bs'
+import { CgLogOff } from 'react-icons/cg'
 
 export default function Sitenavbar() {
   const currentMember = useSelector((state) => state.auth.currentMember)
@@ -114,7 +116,10 @@ export default function Sitenavbar() {
 
               {currentMember && (
                 <LinkContainer id="navlink-clubhouse" to="/clubhouse">
-                  <Nav.Link>Club House</Nav.Link>
+                  <Nav.Link>
+                    <BsFillHouseFill className="me-2" />
+                    Club
+                  </Nav.Link>
                 </LinkContainer>
               )}
 
@@ -123,7 +128,10 @@ export default function Sitenavbar() {
                   id="navlink-logout"
                   onClick={async () => setShowLogoutModal(true)}
                 >
-                  <Nav.Link className="subNavLink">Logout</Nav.Link>
+                  <Nav.Link className="subNavLink">
+                    <CgLogOff className="me-2" />
+                    Logout
+                  </Nav.Link>
                 </div>
               )}
 

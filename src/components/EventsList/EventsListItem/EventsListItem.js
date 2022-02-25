@@ -10,7 +10,7 @@ export default function EventsListItem({
   title,
   imageSrc,
   location,
-  details,
+  dateTime,
   address,
   content,
 }) {
@@ -21,7 +21,7 @@ export default function EventsListItem({
           <Col>
             <div>
               <Image
-                src={require(`../../../assets/images/generic/${imageSrc}`)}
+                src={require(`/src/assets/images/generic/${imageSrc}`)}
                 className="eventslist-image"
               />
             </div>
@@ -32,7 +32,7 @@ export default function EventsListItem({
               <div style={{ fontSize: '10pt', marginTop: '0.5em' }}>
                 {location}
                 <br />
-                {details}
+                {dateTime}
               </div>
             </div>
           </Col>
@@ -44,7 +44,7 @@ export default function EventsListItem({
           <Col>
             <div>
               <strong style={{ display: 'block' }}>{title}</strong>
-              {details}
+              {dateTime}
             </div>
           </Col>
           <Col>

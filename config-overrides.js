@@ -9,6 +9,7 @@ module.exports = function override(config) {
     '@utils': 'src/utils',
     '@views': 'src/views',
     '@features': 'src/features',
+    '@images': 'src/assets/images',
   })(config)
 
   return config

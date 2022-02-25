@@ -17,7 +17,7 @@ export default function EventsList() {
               title="LIVE @ Arrow: Franklin Pearl & The Moon"
               imageSrc="beer.jpg"
               location="Arrow Bar"
-              details="Sat 1/22 at 9:00pm $5 cover"
+              dateTime="Sat 1/22 at 9:00pm $5 cover"
               address="110 E 36th St. Texarkana, AR 71854"
               content="Join me at the Arrow Bar THIS Saturday the 22nd at 9:00pm for some
           great local bands, including Vela Nora, Franklin Pearl & The Moon, and
@@ -31,7 +31,7 @@ export default function EventsList() {
               title="Wine Tasting at Texas A&M Texarkana"
               imageSrc="nuts.jpg"
               location="Pecan Point Brewery"
-              details="Fri 2/22 at 6:30pm"
+              dateTime="Fri 2/22 at 6:30pm"
               address="241 Emory Ln. Texarkana, AR 71854"
               content="Dine with us and enjoy sampling Des Moines' best wines, plus we're going LIVE on TikTok to build exposure"
             />

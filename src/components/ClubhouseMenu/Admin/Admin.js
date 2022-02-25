@@ -28,10 +28,12 @@ function Admin() {
                   News
                 </Dropdown.Item>
               </LinkContainer>
-              <Dropdown.Item>
-                <BsCalendarDay className="me-2" />
-                Events
-              </Dropdown.Item>
+              <LinkContainer to="/clubhouse/admin/events">
+                <Dropdown.Item>
+                  <BsCalendarDay className="me-2" />
+                  Events
+                </Dropdown.Item>
+              </LinkContainer>
             </DropdownButton>
           </div>
         </Col>
