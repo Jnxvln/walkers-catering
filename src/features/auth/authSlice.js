@@ -45,6 +45,9 @@ export const getMemberAsync = createAsyncThunk(
       withCredentials: true,
       url: 'http://localhost:3001/api/auth/member',
     }).then((res) => {
+      if (res.data.email) {
+        localStorage.setItem('member', res.data)
+      }
       return res.data
     })
   }
@@ -59,10 +62,6 @@ export const logoutAsync = createAsyncThunk('auth/logoutAsync', async () => {
     .then(() => localStorage.removeItem('member'))
     .catch((err) => console.error(err))
 })
-
-export const isAuthenticated = () => {
-  return sessionStorage.getItem('mtkn')
-}
 
 export const authSlice = createSlice({
   name: 'auth',
@@ -91,12 +90,12 @@ export const authSlice = createSlice({
       state.status = 'LOGIN:FAILED'
     },
     // #endregion
-
     // #region logoutAsync
     [logoutAsync.pending]: (state) => {
       state.status = 'LOGOUT:PENDING'
     },
     [logoutAsync.fulfilled]: (state) => {
+      localStorage.removeItem('member')
       state.status = 'LOGOUT:SUCCESS'
       state.currentMember = null
     },
