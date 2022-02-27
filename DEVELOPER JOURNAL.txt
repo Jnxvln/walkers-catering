@@ -1,8 +1,11 @@
 BIG TO-DOs:
-  Token expiring & not yet refreshing; no UI updates to show this
   Event data on public Events view don't match those of the Home view
 
 ================================================================================================
+
+2/27/2022 3:14PM
+Changed auth from JSON Web Token to PassportJS. Mostly works, but when logged out and go to /clubhouse, briefly displays the
+clubhouse page before redirecting to login screen. NOT GOOD. Tried many fixes, I've gotten nothing to work so far.
 
 2/25/2022 7:09AM
 I've added the Events pages and views.
@@ -12,7 +15,6 @@ Need to handle not only token refresh, but UI messages or toasts to inform the u
 
 Also, events data on the home view don't match that of the Events public page. (No image src, location, etc.)
 These will need to match. The home view should basically just show the textual properties and lead the user to the actual public Events page where the image and all the other details are present
-
 
 
 

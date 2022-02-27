@@ -4,15 +4,15 @@ import { Tabs, Tab } from 'react-bootstrap'
 import Home from './Home/Home'
 import Profile from './Profile/Profile'
 import Admin from './Admin/Admin'
-import { getMemberAsync } from '../../features/auth/authSlice'
+// import { getMemberAsync } from '../../features/auth/authSlice'
 import { useSelector, useDispatch } from 'react-redux'
 
 function ClubhouseMenu() {
   const dispatch = useDispatch()
 
-  const refreshMember = () => {
-    dispatch(getMemberAsync())
-  }
+  // const refreshMember = () => {
+  //   dispatch(getMemberAsync())
+  // }
 
   const member = useSelector((state) => state.auth.currentMember)
 
@@ -22,17 +22,7 @@ function ClubhouseMenu() {
   })
 
   return (
-    <Tabs
-      id="clubhouse-menu"
-      className="mb-3"
-      onSelect={(key) => {
-        if (key === 'profile') {
-          refreshMember()
-        } else {
-          setKey(key)
-        }
-      }}
-    >
+    <Tabs id="clubhouse-menu" className="mb-3">
       {member && member.isAdmin && member.isAdmin === true && (
         <Tab className="clubhouse-menu-tab" eventKey="admin" title="Admin">
           <Admin />

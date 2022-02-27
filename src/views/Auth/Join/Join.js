@@ -50,38 +50,21 @@ export default function Join() {
     console.log('MEMBER DATA TO SUBMIT TO SERVER:')
     console.log(state)
 
-    const member = {
-      firstName: state.firstName,
-      lastName: state.lastName,
-      email: state.email,
-      username: state.username,
-      password: state.password,
-      discovery: state.discovery,
-      interests: state.interests,
-      isMemberActive: true,
-      isSubscriptionActive: false,
-      subscriptionSince: null,
-      dateAccountCreated: new Date(),
-      memberSince: new Date(),
-    }
-
-    axios
-      .post('http://localhost:3001/api/club/members', member)
+    axios({
+      method: 'POST',
+      data: {
+        firstName: state.firstName,
+        lastName: state.lastName,
+        email: state.email,
+        password: state.password,
+        discovery: state.discovery,
+        interests: state.interests,
+      },
+      withCredentials: true,
+      url: 'http://localhost:3001/api/auth/register',
+    })
       .then((res) => {
-        if (!res) {
-          throw new Error(
-            'ERROR! [Join.js - handleSubmit()]: Falsey response from server.'
-          )
-        }
-
-        if (!res.data) {
-          throw new Error(
-            'ERROR! [Join.js - handleSubmmit()]: Response good, but data property is falsey'
-          )
-        }
-
-        console.log('SERVER RESPONSE: ', res)
-
+        console.log(res)
         clearForm()
         dispatch(
           createToast({
@@ -94,9 +77,45 @@ export default function Join() {
         navigate('/login')
       })
       .catch((err) => {
-        console.log('ERROR RESPONSE: ')
-        console.error(err)
+        if (!err.response) throw new Error('No response from server')
+        if (!err.response.data)
+          throw new Error('Server response good, but no DATA attached...')
+        alert(err.response.data)
+        console.error(err.response.data)
       })
+
+    // axios
+    //   .post('http://localhost:3001/api/auth/register', member)
+    //   .then((res) => {
+    //     if (!res) {
+    //       throw new Error(
+    //         'ERROR! [Join.js - handleSubmit()]: Falsey response from server.'
+    //       )
+    //     }
+
+    //     if (!res.data) {
+    //       throw new Error(
+    //         'ERROR! [Join.js - handleSubmmit()]: Response good, but data property is falsey'
+    //       )
+    //     }
+
+    //     console.log('SERVER RESPONSE: ', res)
+
+    //     clearForm()
+    //     dispatch(
+    //       createToast({
+    //         title: 'Welcome',
+    //         type: 'SUCCESS',
+    //         message:
+    //           'Thank you for signing up! Please verify your e-mail address in the link we e-mailed to you. You may now log in!',
+    //       })
+    //     )
+    //     navigate('/login')
+    //   })
+    //   .catch((err) => {
+    //     console.log('ERROR RESPONSE: ')
+    //     console.error(err.response.data)
+    //   })
 
     // axios
     //   .post('http://localhost:3001/api/club/members', member)

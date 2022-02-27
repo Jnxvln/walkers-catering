@@ -2,49 +2,65 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import axios from 'axios'
 
 const initialState = {
-  token: sessionStorage.getItem('user')
-    ? JSON.parse(sessionStorage.getItem('user')).token
-    : null,
-  currentMember: sessionStorage.getItem('user')
-    ? JSON.parse(sessionStorage.getItem('user')).member
-    : null,
+  currentMember: localStorage.getItem('member') || null,
   status: null,
 }
 
 export const loginAsync = createAsyncThunk(
   'auth/loginAsync',
-  async ({ email, password }, { dispatch }) => {
-    return axios
-      .post('http://localhost:3001/api/auth', { email, password })
+  async ({ email, password }) => {
+    return axios({
+      method: 'POST',
+      data: {
+        email,
+        password,
+      },
+      withCredentials: true,
+      url: 'http://localhost:3001/api/auth/login',
+    })
       .then((res) => {
-        // dispatch(setCurrentMember(res.data))
-        return res.data
+        if (!res) throw new Error('LOGIN: No response from server')
+        if (!res.data) {
+          throw new Error(
+            'LOGIN: Response from server good, but no DATA property attached'
+          )
+        } else {
+          const { member } = res.data
+          localStorage.setItem('member', member)
+          return member
+        }
+      })
+      .catch((err) => {
+        console.error(err)
       })
   }
 )
 
 export const getMemberAsync = createAsyncThunk(
   'auth/getMemberAsync',
-  async (_, { dispatch, getState }) => {
-    axios
-      .get('http://localhost:3001/api/auth/member', {
-        headers: {
-          'x-auth-token': getState().auth.token,
-        },
-      })
+  async () => {
+    console.log('inside getMemberAsync...')
+    return axios({
+      method: 'GET',
+      withCredentials: true,
+      url: 'http://localhost:3001/api/auth/member',
+    })
       .then((res) => {
-        dispatch(setCurrentMember(res.data))
+        return res.data
       })
       .catch((err) => console.error(err))
   }
 )
 
-export const logoutAsync = createAsyncThunk(
-  'auth/logoutAsync',
-  (_, { dispatch }) => {
-    dispatch(memberLogOut())
-  }
-)
+export const logoutAsync = createAsyncThunk('auth/logoutAsync', async () => {
+  return axios({
+    method: 'POST',
+    withCredentials: true,
+    url: 'http://localhost:3001/api/auth/logout',
+  })
+    .then(() => localStorage.removeItem('member'))
+    .catch((err) => console.error(err))
+})
 
 export const isAuthenticated = () => {
   return sessionStorage.getItem('mtkn')
@@ -57,39 +73,24 @@ export const authSlice = createSlice({
     setCurrentMember: (state, action) => {
       state.currentMember = action.payload
     },
-    memberLogOut: (state) => {
-      sessionStorage.removeItem('user')
-      // console.log('user: ', sessionStorage.getItem('user'))
-      state = {
-        token: null,
-        currentMember: null,
-        status: 'LOGOUT:SUCCESS',
-      }
-    },
   },
   extraReducers: {
     // #region loginAsync
     [loginAsync.pending]: (state) => {
-      state.currentMember = null
       state.status = 'LOGIN:PENDING'
     },
     [loginAsync.fulfilled]: (state, action) => {
-      const { member, token } = action.payload
+      // console.log('FULFILLED: MEMBER: ', action.payload)
 
-      sessionStorage.setItem('user', JSON.stringify(action.payload))
-
-      if (!member || !token) {
-        state.currentMember = null
-        state.token = null
+      if (!action.payload) {
         state.status = 'LOGIN:REJECTED'
-      } else if (member && token) {
-        state.currentMember = member
-        state.token = token
+      } else {
+        state.currentMember = action.payload
         state.status = 'LOGIN:SUCCESS'
       }
     },
     [loginAsync.rejected]: (state) => {
-      state = { ...initialState, status: 'LOGIN:FAILED' }
+      state.status = 'LOGIN:FAILED'
     },
     // #endregion
 
@@ -100,10 +101,9 @@ export const authSlice = createSlice({
     [logoutAsync.fulfilled]: (state) => {
       state.status = 'LOGOUT:SUCCESS'
       state.currentMember = null
-      state.token = null
     },
     [logoutAsync.rejected]: (state) => {
-      state.stats = 'LOGOUT:FAILED'
+      state.status = 'LOGOUT:FAILED'
     },
     // #endregion
     // #region getMemberAsync

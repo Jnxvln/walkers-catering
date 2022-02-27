@@ -42,33 +42,8 @@ export default function Login() {
               delay: 4000,
             })
           )
-
-        const currentMember = action.payload
-        if (!currentMember.token) {
-          dispatch(
-            createToast({
-              title: 'Invalid Token',
-              message:
-                'Invalid token, please try logging in again or contact site administrator if error persists',
-              type: 'ERROR',
-            })
-          )
-        }
-
-        if (!currentMember.member) {
-          dispatch(
-            createToast({
-              title: 'Server Error',
-              message:
-                'Member data error, please try logging in again or contact site administrator if error persists',
-              type: 'ERROR',
-            })
-          )
-        }
-
-        if (currentMember.token && currentMember.member) {
-          navigate('/clubhouse')
-        }
+        console.log('ACTION: ', action)
+        navigate('/clubhouse')
       })
       .catch((err) => {
         console.log('\n\nSPECIAL ERROR: ')

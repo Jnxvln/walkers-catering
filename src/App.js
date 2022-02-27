@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Routes, Route, Navigate } from 'react-router-dom'
 import SiteNavbar from '@components/ui/SiteNavbar/Sitenavbar.js'
 import SiteToastContainer from '@components/ui/SiteToast/SiteToastContainer'
-import { useSelector } from 'react-redux'
+import { getMemberAsync } from './features/auth/authSlice'
+import { useSelector, useDispatch } from 'react-redux'
 // #region VIEWS
 import Home from '@views/Home/Home'
 import About from '@views/About/About'
@@ -21,14 +22,21 @@ import CreateNews from '@views/Clubhouse/Admin/News/CreateNews'
 // CLUBHOUSE ADMIN - EVENTS
 import ManageEvents from '@views/Clubhouse/Admin/Events/ManageEvents'
 import CreateEvents from '@views/Clubhouse/Admin/Events/CreateEvents'
+import axios from 'axios'
 // #endregion
 
 function PrivateRoute({ children }) {
-  const member = useSelector((state) => state.auth.token)
+  const member = useSelector((state) => state.auth.currentMember)
   return member ? children : <Navigate to="/login" />
 }
 
 function App() {
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(getMemberAsync())
+  }, [dispatch])
+
   return (
     <div className="App">
       <SiteNavbar />
