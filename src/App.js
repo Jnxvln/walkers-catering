@@ -22,7 +22,6 @@ import CreateNews from '@views/Clubhouse/Admin/News/CreateNews'
 // CLUBHOUSE ADMIN - EVENTS
 import ManageEvents from '@views/Clubhouse/Admin/Events/ManageEvents'
 import CreateEvents from '@views/Clubhouse/Admin/Events/CreateEvents'
-import axios from 'axios'
 // #endregion
 
 function PrivateRoute({ children }) {
