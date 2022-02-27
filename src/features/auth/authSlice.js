@@ -44,11 +44,9 @@ export const getMemberAsync = createAsyncThunk(
       method: 'GET',
       withCredentials: true,
       url: 'http://localhost:3001/api/auth/member',
+    }).then((res) => {
+      return res.data
     })
-      .then((res) => {
-        return res.data
-      })
-      .catch((err) => console.error(err))
   }
 )
 
